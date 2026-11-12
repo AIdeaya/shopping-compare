@@ -1,0 +1,21 @@
+# 환경 및 시스템 파일
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 임시 파일 및 캐시
+*.tmp
+*.bak
+*.log
+.vscode/
+.idea/
+
+# 비밀정보 및 민감 데이터 방지
+*.env
+*.pem
+*.key
+token*.txt
+secret*.txt
+
+# 원본 및 사용자 업로드 미디어 (필요시 제외)
+# bg_nature.jpg는 index.html에 포함되지 않고 독립 동작하므로 필요시 주석 해제 가능
