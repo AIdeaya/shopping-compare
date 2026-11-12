@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>쿠팡 무선 헤드폰 3종 비교 대시보드</title>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
 <style>
 :root{
   --ink:#1d1d1f;
@@ -18,7 +19,7 @@ body{
   margin:0;
   background:#f5f5f7;
   color:var(--ink);
-  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans KR",sans-serif;
+  font-family:"Pretendard",-apple-system,BlinkMacSystemFont,system-ui,"Segoe UI",Roboto,sans-serif;
   line-height:1.5;
   -webkit-font-smoothing:antialiased;
 }
@@ -56,14 +57,24 @@ body:before{
 }
 .print-button:hover{background:#0071e3}
 .print-note{color:var(--muted);font-size:.82rem;align-self:center}
-.eyebrow{color:var(--muted);font-weight:800;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase}
+.eyebrow{
+  color:var(--muted);
+  font-weight:800;
+  font-size:.85rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+/* 레퍼런스 이미지와 100% 일치시킨 볼드 & 타이트 자간 타이틀 */
 h1{
-  font-size:clamp(2.6rem,7vw,5.5rem);
-  line-height:1.05;
-  letter-spacing:-.05em;
+  font-size:clamp(3rem,8.5vw,6.4rem);
+  line-height:1.02;
+  letter-spacing:-.065em;
   margin:10px 0 16px;
   font-weight:900;
+  color:#111113;
 }
+
 .intro{max-width:780px;color:#424245;font-size:1.05rem;line-height:1.6}
 .meta{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0}
 .chip{
@@ -291,29 +302,84 @@ h1{
 }
 .foot{color:#6e6e73;font-size:.82rem;line-height:1.6;margin-top:24px;text-align:center}
 
+/* ========================================================
+   웹 화면과 PDF 저장이 1:1 완벽 일치하도록 구성된 인쇄 스타일
+   ======================================================== */
 @media print{
-  @page{size:A4 portrait;margin:8mm 8mm}
+  @page{
+    size:A4 portrait;
+    margin:6mm 6mm;
+  }
   *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
-  body{background:#f5f5f7!important;color:#1d1d1f!important;font-size:11px!important}
-  .wrap{width:100%!important;padding:10px 0!important}
+  body{
+    background:#f5f5f7!important;
+    color:#1d1d1f!important;
+    font-size:10.5px!important;
+  }
+  .wrap{width:100%!important;padding:8px 0!important}
   .toolbar{display:none!important}
-  h1{font-size:3.2rem!important;margin:6px 0 12px!important}
-  .intro{font-size:.9rem!important}
-  .meta{margin:14px 0!important}
-  .notice,.decision,.summary{border-radius:16px!important;box-shadow:none!important;break-inside:avoid}
-  .grid{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:12px!important}
-  .card{border-radius:16px!important;padding:14px!important;box-shadow:none!important;break-inside:avoid}
-  .product-image{height:120px!important;margin:-2px -2px 10px!important}
-  .card h2{font-size:1.05rem!important;margin:6px 0 8px!important}
-  .price{font-size:1.25rem!important}
-  .rating{padding:5px 8px!important;margin-bottom:10px!important;font-size:.76rem!important}
-  .facts{gap:5px!important;padding-top:8px!important}
-  .diff{margin:10px 0 8px!important;font-size:.8rem!important}
-  .proscons{gap:5px!important;margin-bottom:12px!important;font-size:.76rem!important}
-  .choice{padding:8px 10px!important;margin-bottom:12px!important;font-size:.76rem!important}
-  .link{padding:8px 10px!important;font-size:.78rem!important}
-  .summary{padding:18px!important}
-  .summary th,.summary td{padding:8px 6px!important;font-size:.78rem!important}
+  
+  /* 인쇄 시에도 레퍼런스 특유의 초대형 볼드 제목 비율 유지 */
+  h1{
+    font-size:3.6rem!important;
+    line-height:1.02!important;
+    letter-spacing:-.065em!important;
+    font-weight:900!important;
+    margin:6px 0 12px!important;
+  }
+  .intro{font-size:.88rem!important;max-width:100%!important}
+  .meta{margin:12px 0!important}
+  .chip{padding:5px 10px!important;font-size:.76rem!important}
+  .notice,.decision,.summary{
+    border-radius:14px!important;
+    box-shadow:none!important;
+    border:1px solid rgba(0,0,0,.08)!important;
+    break-inside:avoid;
+    page-break-inside:avoid;
+  }
+  .notice{padding:10px 14px!important;margin-bottom:14px!important}
+  .decision{padding:16px 18px!important;margin-bottom:16px!important;background:#1d1d1f!important;color:#fff!important}
+  
+  /* 가로 3열 레이아웃 웹과 100% 동일하게 유지 */
+  .grid{
+    display:grid!important;
+    grid-template-columns:repeat(3,1fr)!important;
+    gap:10px!important;
+    margin-bottom:16px!important;
+  }
+  .card{
+    border-radius:14px!important;
+    padding:12px!important;
+    box-shadow:none!important;
+    border:1px solid rgba(0,0,0,.08)!important;
+    break-inside:avoid;
+    page-break-inside:avoid;
+  }
+  .product-image{
+    height:110px!important;
+    margin:-2px -2px 8px!important;
+    padding:8px!important;
+  }
+  .card h2{font-size:.95rem!important;margin:4px 0 6px!important}
+  .price{font-size:1.15rem!important}
+  .status{margin:3px 0 8px!important;font-size:.72rem!important}
+  .rating{padding:4px 8px!important;margin-bottom:8px!important;font-size:.74rem!important}
+  .facts{gap:4px!important;padding-top:6px!important;font-size:.78rem!important}
+  .diff{margin:8px 0 6px!important;font-size:.76rem!important}
+  .proscons{gap:4px!important;margin-bottom:8px!important;font-size:.74rem!important}
+  .proscons div{padding:6px 8px!important}
+  .choice{padding:6px 8px!important;margin-bottom:8px!important;font-size:.74rem!important}
+  .link{
+    padding:7px 10px!important;
+    font-size:.76rem!important;
+    background:#0071e3!important;
+    color:#fff!important;
+  }
+  .summary{padding:16px!important;margin-top:16px!important}
+  .summary h2{font-size:1.15rem!important;margin-bottom:10px!important}
+  .summary th,.summary td{padding:6px 5px!important;font-size:.75rem!important}
+  .summary-thumb{width:32px!important;height:32px!important}
+  .foot{margin-top:14px!important;font-size:.74rem!important}
 }
 
 @media(max-width:820px){
@@ -324,7 +390,7 @@ h1{
 }
 @media(max-width:560px){
   .wrap{width:calc(100% - 24px);padding:24px 0 36px}
-  h1{font-size:clamp(2.4rem,14vw,3.8rem);margin-top:10px}
+  h1{font-size:clamp(2.7rem,15vw,4.2rem);margin-top:10px}
   .intro{font-size:.95rem}
   .meta{margin:16px 0;display:grid;grid-template-columns:1fr 1fr}
   .chip{font-size:.76rem}
