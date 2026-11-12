@@ -56,7 +56,7 @@ body:before{
   transition:background .2s ease;
 }
 .print-button:hover{background:#0071e3}
-.print-note{color:#6e6e73;font-size:.78rem;align-self:center}
+.print-note{color:var(--muted);font-size:.78rem;align-self:center}
 .eyebrow{
   color:#6e6e73;
   font-weight:800;
@@ -175,7 +175,7 @@ h1{
 .price{
   font-size:1.75rem;
   font-weight:900;
-  letter-spacing:-.06em;
+  letter-spacing:-.05em;
   color:#000;
 }
 .price small{
@@ -301,20 +301,133 @@ h1{
 .foot{color:#6e6e73;font-size:.82rem;line-height:1.6;margin-top:20px;text-align:center}
 
 /* ========================================================
-   레퍼런스 사이트의 실제 @media print CSS를 100% 그대로 적용
+   인쇄/PDF 시 3종 카드가 무조건 한 페이지에 3열로 나란히 들어가도록 강제
    ======================================================== */
 @media print{
-  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  body{background:#f5f5f7!important;color:#1d1d1f!important}
-  .wrap{width:min(1180px,calc(100% - 48px));padding:42px 0 60px}
-  .toolbar{display:flex!important}
-  .print-button{background:#1d1d1f!important;color:#fff!important}
-  .notice,.card,.summary{background:rgba(255,255,255,.88)!important;border:1px solid rgba(255,255,255,.7)!important;box-shadow:0 12px 34px rgba(31,24,20,.10)!important;break-inside:avoid}
-  .decision{background:rgba(29,29,31,.92)!important;break-inside:avoid}
-  .link{background:#0071e3!important;color:#fff!important}
-  .foot{color:#6e6e73!important;text-shadow:none!important}
-  h1{font-size:clamp(3rem,8vw,6.8rem)}
-  .grid{gap:20px}
+  @page{
+    size:A4 portrait;
+    margin:6mm 6mm;
+  }
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  body{
+    background:#f5f5f7!important;
+    color:#1d1d1f!important;
+  }
+  .wrap{
+    width:100%!important;
+    max-width:100%!important;
+    padding:0!important;
+  }
+  .toolbar{display:none!important}
+  
+  /* 3열 카드가 절대 다음 장으로 넘어가지 않도록 강제 flex-nowrap 고정 */
+  .grid{
+    display:flex!important;
+    flex-direction:row!important;
+    flex-wrap:nowrap!important;
+    gap:10px!important;
+    width:100%!important;
+    margin-bottom:14px!important;
+    page-break-inside:avoid!important;
+    break-inside:avoid!important;
+  }
+  .card{
+    flex:1 1 0px!important;
+    width:33.333%!important;
+    min-width:0!important;
+    padding:14px 12px!important;
+    border-radius:16px!important;
+    background:rgba(255,255,255,.95)!important;
+    border:1px solid #e5e5e7!important;
+    box-shadow:none!important;
+    page-break-inside:avoid!important;
+    break-inside:avoid!important;
+  }
+  .product-image{
+    height:135px!important;
+    margin:-2px -2px 10px!important;
+  }
+  .card h2{
+    font-size:1.05rem!important;
+    margin:6px 0 10px!important;
+  }
+  .price{
+    font-size:1.35rem!important;
+  }
+  .price small{
+    font-size:.7rem!important;
+  }
+  .status{
+    margin:4px 0 10px!important;
+    font-size:.72rem!important;
+  }
+  .rating{
+    padding:5px 8px!important;
+    font-size:.76rem!important;
+    margin-bottom:10px!important;
+  }
+  .facts{
+    gap:5px!important;
+    padding-top:8px!important;
+    font-size:.8rem!important;
+  }
+  .diff{
+    font-size:.8rem!important;
+    margin:10px 0 8px!important;
+    line-height:1.4!important;
+  }
+  .proscons{
+    gap:5px!important;
+    margin-bottom:10px!important;
+    font-size:.76rem!important;
+  }
+  .proscons div{
+    padding:6px 8px!important;
+    line-height:1.35!important;
+  }
+  .choice{
+    padding:6px 8px!important;
+    font-size:.76rem!important;
+    line-height:1.35!important;
+    margin-bottom:10px!important;
+  }
+  .link{
+    padding:8px 10px!important;
+    font-size:.8rem!important;
+    background:var(--blue)!important;
+    color:#fff!important;
+  }
+  
+  /* 헤더 및 안내 블록 최적화 */
+  h1{
+    font-size:2.8rem!important;
+    margin:4px 0 10px!important;
+  }
+  .intro{font-size:.92rem!important}
+  .meta{margin:12px 0!important}
+  .notice{
+    padding:10px 14px!important;
+    margin-bottom:12px!important;
+    font-size:.82rem!important;
+    page-break-inside:avoid!important;
+    break-inside:avoid!important;
+  }
+  .decision{
+    padding:14px 16px!important;
+    margin-bottom:14px!important;
+    page-break-inside:avoid!important;
+    break-inside:avoid!important;
+  }
+  .decision h2{font-size:1.1rem!important;margin-bottom:6px!important}
+  .decision p{font-size:.84rem!important;margin-bottom:8px!important}
+  
+  .summary{
+    padding:16px!important;
+    page-break-inside:avoid!important;
+    break-inside:avoid!important;
+  }
+  .summary table{font-size:.78rem!important}
+  .summary th, .summary td{padding:8px 6px!important}
 }
 
 @media(max-width:820px){
